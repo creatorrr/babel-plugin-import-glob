@@ -8,10 +8,10 @@ const identifierfy = require('identifierfy')
 function generateMembers (files, pattern, cwd) {
   return capture.match(files, pattern).map(match => {
     const file = match[0]
-    const subpath = match[1]
+    const subpath = match[1].replace(/\.(m*)[tj]s(x*)$/, '')
     return {
       file,
-      relative: './' + path.relative(cwd, path.resolve(cwd, file)),
+      relative: './' + path.relative(cwd, path.resolve(cwd, file)).replace(/\.(m*)[tj]s(x*)$/, ''),
       name: memberify(subpath)
     }
   })
